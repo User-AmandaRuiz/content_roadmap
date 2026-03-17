@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>March 2026 Roadmap</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{background:#060611;color:#e2e8f0;font-family:system-ui,sans-serif;font-size:16px;min-height:100vh;padding:1rem;}
+@media(min-width:768px){body{padding:2rem;}}
+
+.bg-glow{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.bg-glow::before{content:'';position:absolute;top:-10%;left:-10%;width:50%;height:50%;background:rgba(124,58,237,0.08);filter:blur(120px);border-radius:50%;}
+.bg-glow::after{content:'';position:absolute;bottom:-10%;right:-10%;width:50%;height:50%;background:rgba(37,99,235,0.08);filter:blur(120px);border-radius:50%;}
+.wrap{max-width:1280px;margin:0 auto;position:relative;z-index:1;}
+
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:999px;background:rgba(234,179,8,0.1);border:1px solid rgba(234,179,8,0.2);color:#facc15;font-size:11px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.6rem;}
+.title{font-size:clamp(1.8rem,6vw,3.8rem);font-weight:900;letter-spacing:-0.03em;background:linear-gradient(90deg,#fff 60%,#475569);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.15;}
+
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;margin:1.5rem 0;}
+@media(min-width:640px){.stats{grid-template-columns:repeat(4,1fr);}}
+.stat-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-bottom:2px solid transparent;border-radius:1.25rem;padding:1.1rem;transition:background 0.2s,border-bottom-color 0.2s;cursor:default;}
+.stat-card:hover{background:rgba(255,255,255,0.07);border-bottom-color:#7c3aed;}
+.stat-icon{font-size:18px;margin-bottom:0.6rem;}
+.stat-value{font-size:1.6rem;font-weight:900;color:#fff;}
+.stat-label{font-size:11px;color:#64748b;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;margin-top:2px;}
+
+.filters{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:1rem;border-radius:1.5rem;margin-bottom:1.5rem;}
+.filter-section{margin-bottom:0.75rem;}
+.filter-section:last-child{margin-bottom:0;}
+.filter-label{font-size:11px;font-weight:800;color:#475569;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.5rem;}
+.filter-group{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.btn{padding:0.5rem 1rem;border-radius:0.65rem;font-size:13px;font-weight:800;border:none;cursor:pointer;transition:all 0.15s;touch-action:manipulation;}
+.btn-level{background:rgba(255,255,255,0.04);color:#94a3b8;}
+.btn-level:hover,.btn-level:active{background:rgba(255,255,255,0.1);}
+.btn-level.active{background:#fff;color:#000;box-shadow:0 4px 15px rgba(255,255,255,0.1);}
+.btn-type{background:rgba(255,255,255,0.04);color:#94a3b8;}
+.btn-type:hover,.btn-type:active{background:rgba(255,255,255,0.1);}
+.btn-type.active{background:#2563eb;color:#fff;box-shadow:0 4px 15px rgba(37,99,235,0.3);}
+
+/* Mobile: lista em cima, detalhe embaixo (stacked) */
+/* Desktop: lado a lado */
+.content-grid{display:flex;flex-direction:column;gap:1.5rem;}
+@media(min-width:1024px){.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;}}
+
+.post-list{display:flex;flex-direction:column;gap:0.75rem;}
+@media(min-width:1024px){.post-list{max-height:780px;overflow-y:auto;padding-right:0.5rem;}}
+.post-list::-webkit-scrollbar{width:4px;}
+.post-list::-webkit-scrollbar-track{background:transparent;}
+.post-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:10px;}
+
+.post-card{padding:1.25rem 1.5rem;border-radius:1.5rem;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);cursor:pointer;transition:all 0.25s;touch-action:manipulation;}
+.post-card:active{transform:scale(0.98);}
+.post-card.active{background:linear-gradient(135deg,rgba(124,58,237,0.12),rgba(37,99,235,0.08));border-color:rgba(124,58,237,0.4);box-shadow:0 4px 20px rgba(0,0,0,0.3);}
+@media(min-width:1024px){.post-card.active{transform:scale(1.02);}}
+.post-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;gap:0.5rem;}
+.post-day{font-size:11px;font-weight:800;color:#7c3aed;background:rgba(124,58,237,0.1);padding:3px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;}
+.post-tags{display:flex;gap:0.4rem;flex-shrink:0;}
+.tag{font-size:10px;font-weight:800;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;}
+.tag-level{color:#94a3b8;border:1px solid rgba(255,255,255,0.1);}
+.tag-type{color:#60a5fa;background:rgba(96,165,250,0.1);}
+.post-title{font-size:1.2rem;font-weight:900;color:#fff;line-height:1.25;margin-bottom:0.3rem;}
+.post-focus{font-size:14px;color:#64748b;font-weight:500;}
+
+.empty-state{padding:3rem 1.5rem;text-align:center;background:rgba(255,255,255,0.03);border:1px dashed rgba(255,255,255,0.08);border-radius:2rem;color:#475569;font-size:15px;}
+.empty-icon{font-size:2.5rem;margin-bottom:0.75rem;}
+
+/* Painel de detalhe — mobile: sem sticky, só flui normalmente */
+.detail-panel{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:2rem;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.4);}
+@media(min-width:1024px){.detail-panel{position:sticky;top:2rem;border-radius:3rem;}}
+
+.tab-bar{background:#0d0d24;display:flex;gap:0.4rem;padding:0.75rem;border-bottom:1px solid rgba(255,255,255,0.05);}
+.tab-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:0.7rem 0.4rem;border-radius:0.85rem;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;border:none;cursor:pointer;transition:all 0.2s;background:transparent;color:#64748b;touch-action:manipulation;white-space:nowrap;}
+.tab-btn:active{opacity:0.8;}
+.tab-btn.active{background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;box-shadow:0 4px 16px rgba(37,99,235,0.3);}
+
+.tab-content{padding:1.5rem;}
+@media(min-width:768px){.tab-content{padding:2rem;}}
+@media(min-width:1024px){.tab-content{max-height:62vh;overflow-y:auto;}}
+.tab-content::-webkit-scrollbar{width:4px;}
+.tab-content::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:10px;}
+
+.section{margin-bottom:2rem;}
+.section-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;display:flex;align-items:center;gap:5px;margin-bottom:0.75rem;}
+.s-blue{color:#60a5fa;}.s-pink{color:#f472b6;}.s-slate{color:#64748b;}.s-purple{color:#a78bfa;}.s-yellow{color:#fbbf24;}
+
+.block{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:1.25rem;padding:1.25rem;}
+.field-label{font-size:11px;font-weight:800;color:#475569;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.35rem;}
+.field-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem;}
+.copy-btn{font-size:12px;font-weight:700;border:none;background:none;cursor:pointer;transition:opacity 0.15s;padding:4px 8px;border-radius:6px;touch-action:manipulation;}
+.copy-btn.en{color:#60a5fa;background:rgba(96,165,250,0.08);}
+.copy-btn.pt{color:#4ade80;background:rgba(74,222,128,0.08);}
+.copy-btn:active{opacity:0.6;}
+
+.hook-text{font-size:1.05rem;font-weight:700;color:#fff;font-style:italic;line-height:1.5;}
+.caption-en{font-size:14px;color:#cbd5e1;line-height:1.7;font-weight:500;font-style:italic;}
+.caption-pt{font-size:14px;color:#94a3b8;line-height:1.7;font-style:italic;}
+.sep{height:1px;background:rgba(255,255,255,0.06);margin:0.85rem 0;}
+
+.warning-block{background:rgba(244,63,94,0.05);border:1px solid rgba(244,63,94,0.18);border-radius:1.25rem;padding:1.25rem;}
+.warning-text{font-size:14px;color:rgba(251,207,232,0.85);font-style:italic;font-weight:500;line-height:1.6;}
+
+.hashtag-list{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.hashtag{padding:6px 12px;border-radius:0.65rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);font-size:12px;font-weight:700;color:#94a3b8;cursor:default;}
+
+.audio-row{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.04);padding:1rem;border-radius:1rem;border:1px solid rgba(255,255,255,0.08);}
+.audio-icon{background:rgba(251,191,36,0.15);padding:8px;border-radius:10px;font-size:18px;flex-shrink:0;}
+.audio-label{font-size:15px;font-weight:800;color:#cbd5e1;}
+
+.class-block{padding:1.25rem;border-radius:1.25rem;margin-bottom:0.75rem;}
+.cb-blue{background:rgba(37,99,235,0.05);border:1px solid rgba(37,99,235,0.12);}
+.cb-purple{background:rgba(124,58,237,0.05);border:1px solid rgba(124,58,237,0.12);}
+.cb-green{background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.12);}
+.cb-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.4rem;}
+.cbl-blue{color:#60a5fa;}.cbl-purple{color:#a78bfa;}.cbl-green{color:#4ade80;}
+.cb-text{font-size:15px;color:#e2e8f0;font-weight:500;line-height:1.6;}
+.prod-text{font-size:15px;color:#e2e8f0;font-weight:600;line-height:1.7;}
+
+.detail-footer{background:rgba(255,255,255,0.03);padding:1rem 1.5rem;border-top:1px solid rgba(255,255,255,0.05);}
+.footer-label{font-size:11px;font-weight:800;color:#334155;text-transform:uppercase;letter-spacing:0.12em;font-style:italic;}
+
+/* Scroll suave ao clicar num card no mobile */
+.detail-anchor{scroll-margin-top:1rem;}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="wrap">
+
+  <header style="margin-bottom:1.5rem;">
+    <div class="badge">★ Creator Space</div>
+    <h1 class="title">🌿 March 2026 Roadmap</h1>
+  </header>
+
+  <div class="stats">
+    <div class="stat-card"><div class="stat-icon">📅</div><div class="stat-value">31</div><div class="stat-label">Posts</div></div>
+    <div class="stat-card"><div class="stat-icon">🎬</div><div class="stat-value">8</div><div class="stat-label">Prod. Days</div></div>
+    <div class="stat-card"><div class="stat-icon">📈</div><div class="stat-value">45K</div><div class="stat-label">Est. Reach</div></div>
+    <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-value">Premium</div><div class="stat-label">Strategy</div></div>
+  </div>
+
+  <div class="filters">
+    <div class="filter-section">
+      <div class="filter-label">Nível</div>
+      <div class="filter-group" id="level-filters"></div>
+    </div>
+    <div class="filter-section">
+      <div class="filter-label">Tipo</div>
+      <div class="filter-group" id="type-filters"></div>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <div class="post-list" id="post-list"></div>
+
+    <div class="detail-panel detail-anchor" id="detail-panel">
+      <div class="tab-bar" id="tab-bar"></div>
+      <div class="tab-content" id="tab-content"></div>
+      <div class="detail-footer"><div class="footer-label" id="footer-level"></div></div>
+    </div>
+  </div>
+
+</div>
+<script>
+const DATA=[
+  {id:1,day:"March 1",type:"Reels",focus:"Phrasal Verbs (Business)",level:"B2",title:"Closing the Deal",captionEn:"Ready to take your business meetings to the next level? 🚀 Stop saying 'finish' and start saying 'wrap up'.",captionPt:"Pronto para elevar suas reuniões de negócios? 🚀 Pare de dizer 'finish' e comece a dizer 'wrap up'.",warmup:"Ask students about a time they had to negotiate something in their first language.",speaking:"Roleplay: Negotiate a 10% discount on coffee beans.",writing:"Draft a follow-up email using 2 phrasal verbs.",hook:"Most students use 'finish' for everything. Here is how to sound like a Senior Exec.",hashtags:["#BusinessEnglish","#PhrasalVerbs","#CareerTips"],production:"Use a split-screen effect. On the left, show a 'boring' version. On the right, show the 'executive' version.",audioVibe:"Lofi-Corporate / Upbeat Minimalist",commonError:"Confusing 'wrap up' (finish) with 'pack up' (physically leave)."},
+  {id:2,day:"March 2",type:"Carousel",focus:"Pronunciation (Minimal Pairs)",level:"A2",title:"Ship vs Sheep",captionEn:"Don't be a sheep! 🐑 Pronunciation is the bridge between knowing English and being understood.",captionPt:"Não seja uma ovelha! 🐑 A pronúncia é a ponte entre saber inglês e ser compreendido.",warmup:"Tongue twister race with short/long vowel sounds.",speaking:"Identify objects in the room with 'short i' or 'long e'.",writing:"Write 5 sentences using minimal pairs.",hook:"Why do learners struggle with 'Beach' vs 'Bitch'? Let's talk about it.",hashtags:["#EnglishPronunciation","#SpeakEnglish","#EnglishAccent"],production:"Focus on close-up shots of your mouth for the vowel sounds.",audioVibe:"Educational / Clean & Focused",commonError:"Shortening the 'ee' sound. Encourage students to smile while saying 'sheep'."},
+  {id:3,day:"March 3",type:"Story",focus:"Real English (Slang)",level:"C1",title:"The Art of Sarcasm",captionEn:"Advanced fluency is about nuance. Sarcasm is an essential social tool in the English-speaking world.",captionPt:"Fluência avançada é sobre nuance. O sarcasmo é uma ferramenta social essencial.",warmup:"Discuss cultural differences in humor.",speaking:"Practice 'That's interesting' with 3 different emotions.",writing:"Write a dialogue with polite sarcasm.",hook:"If you take everything literally, you're missing 50% of the conversation.",hashtags:["#AdvancedEnglish","#EnglishSlang","#EnglishNuance"],production:"Film in a casual setting. Use eye-rolls to emphasize sarcasm.",audioVibe:"Chill Jazz / Introspective",commonError:"Overusing 'not' for sarcasm. Advanced speakers use tone instead."},
+  {id:4,day:"March 4",type:"Reels",focus:"Vocabulary (Cooking)",level:"B1",title:"The Kitchen Vocab",captionEn:"Stop calling everything a 'pot'! 🍳 Learn the specific verbs for your recipes.",captionPt:"Pare de chamar tudo de 'pot'! 🍳 Aprenda os verbos específicos para suas receitas.",warmup:"Ask: What is your favorite dish to cook?",speaking:"Describe a recipe using sequence adverbs.",writing:"Write a shopping list for a dinner party.",hook:"You're not 'cutting' the onion, you're 'dicing' it. Here's why it matters.",hashtags:["#EnglishVocab","#CookingInEnglish","#DailyEnglish"],production:"POV shots of you actually performing the actions.",audioVibe:"Cooking ASMR / Upbeat Acoustic",commonError:"Confusing 'Stove' (top) with 'Oven' (inside)."},
+  {id:5,day:"March 5",type:"Carousel",focus:"False Cognates",level:"B2",title:"Actually vs Atualmente",captionEn:"One word can change everything. 'Actually' doesn't mean what you think it does in Portuguese!",captionPt:"Uma palavra pode mudar tudo. 'Actually' não significa o que você acha que significa!",warmup:"List common words that look like Portuguese.",speaking:"Debate: Why do we make these mistakes?",writing:"Translate 5 sentences correctly using 'In fact'.",hook:"Stop saying 'pretend' when you mean 'intend'. Avoid the embarrassment!",hashtags:["#EnglishMistakes","#FalseFriends","#LearnEnglish"],production:"High-contrast carousel slides (Red vs Green).",audioVibe:"None (Visual Focus)",commonError:"Using 'actually' to mean 'nowadays'."},
+  {id:6,day:"March 6",type:"Challenge",focus:"Listening Skills",level:"A2",title:"Lyric Challenge",captionEn:"Turn up the volume! 🎧 Music is the best way to improve your ear.",captionPt:"Aumente o volume! 🎧 Música é a melhor maneira de melhorar seu ouvido.",warmup:"Play a song and ask for the general theme.",speaking:"Discuss your favorite English lyrics.",writing:"Rewrite a chorus in your own words.",hook:"Can you understand the singer without looking at the lyrics?",hashtags:["#EnglishThroughMusic","#ListeningPractice","#A2English"],production:"Text overlays showing the 'missing' words in time with music.",audioVibe:"Pop / Trending Audio",commonError:"Focusing too much on every word instead of the general context."},
+  {id:7,day:"March 7",type:"Reels",focus:"Travel English",level:"B1",title:"At the Airport",captionEn:"Don't let the airport stress you out. ✈️ Master these phrases before your next trip.",captionPt:"Não deixe o aeroporto te estressar. ✈️ Domine essas frases antes da sua próxima viagem.",warmup:"Roleplay: Checking in a heavy suitcase.",speaking:"Explain what to do if your flight is delayed.",writing:"Write a short complaint letter about lost luggage.",hook:"The gate agent just said 'Gate change'. Do you know where to go?",hashtags:["#TravelEnglish","#AirportVocab","#EnglishTips"],production:"Hold a passport/suitcase as a prop. Use airport background noise.",audioVibe:"Upbeat / Travel Vibe",commonError:"Confusing 'Gate' with 'Platform' (trains)."},
+  {id:8,day:"March 8",type:"Carousel",focus:"Women's Day Special",level:"B2",title:"Influential Voices",captionEn:"Celebrating the women who shaped the English language. 🌸 Happy International Women's Day!",captionPt:"Celebrando as mulheres que moldaram a língua inglesa. 🌸 Feliz Dia da Mulher!",warmup:"Discuss: Who is an influential woman in your life?",speaking:"Present a short bio of a famous female author.",writing:"Write a letter of gratitude to an inspiring woman.",hook:"From Maya Angelou to Virginia Woolf: their words still echo today.",hashtags:["#WomensDay","#Empowerment","#EnglishQuotes"],production:"Elegant aesthetic. Soft colors and clean typography.",audioVibe:"Inspiring Piano",commonError:"Mispronouncing 'women' (plural) vs 'woman' (singular)."},
+  {id:9,day:"March 9",type:"Story",focus:"Grammar (Conditionals)",level:"B2",title:"If I were you...",captionEn:"Hypothetically speaking... 💭 Let's master the 2nd conditional for advice.",captionPt:"Falando hipoteticamente... 💭 Vamos dominar o second conditional para conselhos.",warmup:"If you won the lottery, what would you buy first?",speaking:"Advice session: Students present problems, others give advice.",writing:"Write a 'What if' story about a different life path.",hook:"If I won a million dollars, I... (Wait, is it 'will' or 'would'?)",hashtags:["#EnglishGrammar","#Conditionals","#B2English"],production:"Use a 'thinking' face filter. Text bubbles for the 'If' and 'Would' parts.",audioVibe:"Chill / Thinking music",commonError:"Using 'was' instead of 'were' in formal advice (If I were you)."},
+  {id:10,day:"March 10",type:"Reels",focus:"Workplace Idioms",level:"C1",title:"Corporate Speak",captionEn:"Level up your professional game. 💼 Stop being literal and sound more natural.",captionPt:"Eleve seu nível profissional. 💼 Pare de ser literal e soe mais natural.",warmup:"Do people use many idioms in your office?",speaking:"Redo a boring meeting transcript using professional idioms.",writing:"Draft a project proposal using 3 corporate idioms.",hook:"They told me to 'circle back', but I haven't even started! What does it mean?",hashtags:["#CorporateEnglish","#EnglishIdioms","#BusinessEnglish"],production:"Wear professional attire. Use a clean, office-like background.",audioVibe:"Modern / Tech Corporate",commonError:"Translating idioms literally from Portuguese."},
+  {id:11,day:"March 11",type:"Challenge",focus:"Vocabulary (Nature)",level:"A2",title:"Nature Walk",captionEn:"Get outside! 🌳 Spring is coming, and it's time for nature vocabulary.",captionPt:"Vá lá fora! 🌳 A primavera está chegando, e é hora do vocabulário da natureza.",warmup:"List 5 things you see in a park.",speaking:"Describe your favorite natural place.",writing:"Write 3 sentences about the weather today.",hook:"Is it a 'path' or a 'trail'? Let's find out.",hashtags:["#NatureVocab","#OutdoorEnglish","#EnglishVocabulary"],production:"Film while walking outdoors. Natural lighting.",audioVibe:"Acoustic / Birds chirping",commonError:"Confusing 'Nature' with 'Countryside'."},
+  {id:12,day:"March 12",type:"Carousel",focus:"Punctuation Matters",level:"B1",title:"The Oxford Comma",captionEn:"Punctuation saves lives! 🍕 'Let's eat, grandma' vs 'Let's eat grandma'.",captionPt:"A pontuação salva vidas! 🍕 'Vamos comer, vovó' vs 'Vamos comer a vovó'.",warmup:"Show funny images of punctuation mistakes.",speaking:"Explain the difference in meaning between two sentences.",writing:"Punctuate a 'wall of text' without any markers.",hook:"A comma can be the difference between a nice dinner and a tragedy.",hashtags:["#EnglishWriting","#Punctuation","#GrammarTips"],production:"Visual comedy. Use funny graphics to illustrate the comma difference.",audioVibe:"None (Text focus)",commonError:"Missing the comma before 'and' in a list (Oxford comma)."},
+  {id:13,day:"March 13",type:"Story",focus:"Superstitions",level:"B2",title:"Friday the 13th",captionEn:"Don't walk under that ladder! 🪜 Exploring the language of luck.",captionPt:"Não passe debaixo dessa escada! 🪜 Explorando a linguagem da sorte.",warmup:"What is considered bad luck in your country?",speaking:"Debate: Are you a logical or superstitious person?",writing:"Write a short horror story starting with 'It was Friday the 13th...'",hook:"Why do we say 'Break a leg' to mean 'Good luck'?",hashtags:["#EnglishCulture","#Superstition","#LuckIdioms"],production:"Spooky lighting. Use props like a (toy) black cat or a ladder.",audioVibe:"Mysterious / Suspenseful",commonError:"Using 'luck' as a verb instead of 'get lucky'."},
+  {id:14,day:"March 14",type:"Reels",focus:"Numbers & Math",level:"A1",title:"Pi Day (3.14)",captionEn:"Happy Pi Day! 🥧 Numbers are the foundation. Let's say them correctly.",captionPt:"Feliz Dia do Pi! 🥧 Números são a base. Vamos dizê-los corretamente.",warmup:"Number dictation challenge.",speaking:"Roleplay: Buying groceries and checking the total.",writing:"Write out 5 large numbers in words.",hook:"How do you say 3.14? Is it 'point' or 'comma'?",hashtags:["#PiDay","#EnglishNumbers","#MathEnglish"],production:"Eat a slice of pie in the reel while explaining decimals.",audioVibe:"Playful / Fast-paced",commonError:"Using a comma (3,14) instead of a point (3.14) for decimals."},
+  {id:15,day:"March 15",type:"Carousel",focus:"Collocations (Do/Make)",level:"B1",title:"Do vs Make",captionEn:"Stop mixing them up! 🛑 Use 'do' for actions and 'make' for creations.",captionPt:"Pare de misturá-los! 🛑 Use 'do' para ações e 'make' para criações.",warmup:"Quick-fire round: 'Do' or 'Make'?",speaking:"Describe your routine with 3 'do' and 3 'make' phrases.",writing:"Write a to-do list for a house renovation.",hook:"Do you 'make' homework or 'do' homework? Most people get this wrong.",hashtags:["#DoVsMake","#CommonMistakes","#ESL"],production:"Side-by-side comparison on slides.",audioVibe:"Educational / Upbeat",commonError:"Saying 'do a mistake' is wrong — it's 'make a mistake'."},
+  {id:16,day:"March 16",type:"Challenge",focus:"Tongue Twisters",level:"B2",title:"The Twister Challenge",captionEn:"Time to warm up! 👅 Tongue twisters are perfect for muscle memory.",captionPt:"Hora de aquecer! 👅 Trava-línguas são perfeitos para memória muscular.",warmup:"Repeat 'She sells seashells' slowly.",speaking:"Speed competition with a target tongue twister.",writing:"Write your own twister using the letter 'P'.",hook:"Can you say 'Sixth sick sheik's sixth sheep's sick' three times fast?",hashtags:["#TongueTwister","#PronunciationChallenge","#Elocution"],production:"Close-up of face. Use a stopwatch overlay.",audioVibe:"None (Voice focus)",commonError:"Giving up when the tongue 'trips'. Keep going!"},
+  {id:17,day:"March 17",type:"Story",focus:"Cultural English",level:"B1",title:"St. Patrick's Day",captionEn:"Feeling lucky? ☘️ Happy St. Patrick's Day! Let's learn Irish-influenced English.",captionPt:"Com sorte? ☘️ Feliz Dia de São Patrício! Vamos aprender inglês de influência irlandesa.",warmup:"What do you know about Ireland?",speaking:"Explain the meaning of 'The luck of the Irish'.",writing:"Write 3 things that make you feel lucky.",hook:"Why does everyone wear green today? And what's a 'Leprechaun'?",hashtags:["#StPatricksDay","#IrishEnglish","#EnglishCulture"],production:"Wear a green item. Use Irish folk music as background.",audioVibe:"Irish Folk / Upbeat",commonError:"Saying 'St. Patty' (wrong) instead of 'St. Paddy' (correct)."},
+  {id:18,day:"March 18",type:"Reels",focus:"Phrasal Verbs (Love)",level:"B2",title:"Moving On",captionEn:"Did you 'break up' or 'drift apart'? 💔 Relationships are full of phrasal verbs.",captionPt:"Você 'break up' ou 'drift apart'? 💔 Relacionamentos estão cheios de phrasal verbs.",warmup:"Is it easy to make friends in a new city?",speaking:"Roleplay: Giving relationship advice to a friend.",writing:"Write a diary entry about a 'meet-cute'.",hook:"Stop saying 'He finished with me'. Say 'He broke up with me' like a local.",hashtags:["#DatingEnglish","#LoveIdioms","#EnglishPhrases"],production:"Emotional storytelling vibe. Soft lighting.",audioVibe:"Sad / Emotional Piano",commonError:"Using 'marry with' (wrong) instead of 'marry' or 'get married to'."},
+  {id:19,day:"March 19",type:"Carousel",focus:"Formal vs Informal",level:"B1",title:"The Email Upgrade",captionEn:"Stop emailing like you're texting! 📧 Professionalism starts with word choice.",captionPt:"Pare de e-mailar como se fosse SMS! 📧 Profissionalismo começa na escolha das palavras.",warmup:"Read an informal email and find 'red flags'.",speaking:"Practice turning casual sentences into formal ones.",writing:"Rewrite a text message as a formal inquiry.",hook:"Are you still starting your emails with 'Hey'? Let's fix that.",hashtags:["#BusinessEtiquette","#ProfessionalEnglish","#EmailTips"],production:"Clean, split-screen graphics showing 'Casual' vs 'Professional'.",audioVibe:"None (Reading focus)",commonError:"Ending formal emails with 'Kisses' (too casual/cultural error)."},
+  {id:20,day:"March 20",type:"Story",focus:"Spring Vocab",level:"A2",title:"First Day of Spring",captionEn:"Everything is blooming! 🌸 Welcome Spring with these fresh words.",captionPt:"Tudo florescendo! 🌸 Dê as boas-vindas à Primavera com estas palavras novas.",warmup:"What is your favorite season?",speaking:"Plan a spring picnic with classmates.",writing:"Describe the changes in nature during spring.",hook:"It's time for 'Spring Cleaning'. What's the first thing you'd throw away?",hashtags:["#SpringVocabulary","#LearnEnglish","#Seasons"],production:"Bright, airy video. Flower props. Outdoor setting.",audioVibe:"Happy / Acoustic Guitar",commonError:"Confusing 'Spring' (season) with 'Spring' (metal coil)."},
+  {id:21,day:"March 21",type:"Reels",focus:"Listening (Accents)",level:"C1",title:"The Accent Challenge",captionEn:"English is global! 🌎 Let's explore the beautiful diversity of accents.",captionPt:"Inglês é global! 🌎 Vamos explorar a bela diversidade de sotaques.",warmup:"Play audio clips; guess the location.",speaking:"Discussion: Which accent is easiest to understand?",writing:"Write about the importance of being understood over being 'perfect'.",hook:"Is it 'Wa-ter' or 'Wart-ah'? Accents are the spice of life.",hashtags:["#WorldEnglish","#AccentDiversity","#ListeningSkills"],production:"Quick cuts between different accents. Use flags as overlays.",audioVibe:"Upbeat / Diverse",commonError:"Thinking you need to sound like a 'local' to be fluent."},
+  {id:22,day:"March 22",type:"Carousel",focus:"Prepositions (In/On/At)",level:"A2",title:"In, On, At",captionEn:"Prepositions of time and place! 📍 Master the 'Triangle' method.",captionPt:"Preposições de tempo e lugar! 📍 Domine o método do 'Triângulo'.",warmup:"Draw a triangle; place 'In', 'On', 'At' correctly.",speaking:"Describe your location/schedule using all three.",writing:"Write a bio: 'I was born in..., at..., on...'",hook:"Do you say 'In Monday' or 'On Monday'? Let's settle this.",hashtags:["#EnglishGrammar","#Prepositions","#InOnAt"],production:"Strong geometric graphics. Clear, simple slides.",audioVibe:"Minimalist / Focused",commonError:"Using 'in' for specific days (In Monday — wrong)."},
+  {id:23,day:"March 23",type:"Challenge",focus:"Feelings Vocab",level:"B1",title:"Beyond 'Fine'",captionEn:"How are you? Stop saying 'I'm fine'. 😊 Expand your vocabulary today.",captionPt:"Como você está? Pare de dizer 'I'm fine'. 😊 Expanda seu vocabulário hoje.",warmup:"Charades: Act out an emotion.",speaking:"Story: A time you felt 'overwhelmed'.",writing:"Letter to your future self about your current feelings.",hook:"If someone asks how you are, 'fine' is the most boring answer.",hashtags:["#EmotionalVocab","#EnglishAdjectives","#B1English"],production:"Expressive facial acting. Close-ups on eyes/mouth.",audioVibe:"Empathetic / Warm",commonError:"Using 'I'm with' (wrong) instead of 'I'm' or 'I feel'."},
+  {id:24,day:"March 24",type:"Reels",focus:"Presentations",level:"B2",title:"Hook Your Audience",captionEn:"Public speaking in English? 🎤 Start strong with these 3 strategies.",captionPt:"Falar em público em inglês? 🎤 Comece forte com estas 3 estratégias.",warmup:"Give a 30-second 'elevator pitch'.",speaking:"Practice opening a talk with a shocking stat.",writing:"Draft an introduction for a speech.",hook:"The first 30 seconds of your speech are the most important.",hashtags:["#PublicSpeaking","#BusinessEnglish","#PresentationTips"],production:"Use a microphone (or a pen as a prop). Confidence is key.",audioVibe:"Powerful / Energetic",commonError:"Reading from slides instead of engaging the audience."},
+  {id:25,day:"March 25",type:"Story",focus:"Relative Clauses",level:"C1",title:"The Person Who...",captionEn:"Adding detail like a pro. 🖋️ Relative clauses connect your ideas.",captionPt:"Detalhes como profissional. 🖋️ Relative clauses conectam suas ideias.",warmup:"Describe a celebrity without saying their name.",speaking:"Discuss people who changed history.",writing:"Write a complex description of your town.",hook:"Is it 'That' or 'Which'? And where does the comma go?",hashtags:["#RelativeClauses","#EnglishWriting","#GrammarExpert"],production:"Typewriter effect for text overlays. Academic but modern vibe.",audioVibe:"Lo-fi / Sophisticated",commonError:"Putting commas in defining clauses where they don't belong."},
+  {id:26,day:"March 26",type:"Carousel",focus:"Slang (Gen Z)",level:"B1",title:"No Cap",captionEn:"Don't get left behind! 📱 Understand what the internet is saying.",captionPt:"Não fique para trás! 📱 Entenda o que a internet está dizendo.",warmup:"List any slang words you know.",speaking:"Debate: Should slang be used at work?",writing:"Write a funny text message using slang.",hook:"If someone says your outfit is 'Fire', is that good or bad?",hashtags:["#GenZEnglish","#ModernEnglish","#SlangDaily"],production:"Vibrant colors. Very fast, digital aesthetic.",audioVibe:"Hype / Phonk / Trending",commonError:"Using outdated slang (like 'Radical') that makes you sound old."},
+  {id:27,day:"March 27",type:"Reels",focus:"Word Stress",level:"B2",title:"RE-cord vs re-CORD",captionEn:"Same word, two meanings! 🤯 It depends on the stress.",captionPt:"Mesma palavra, dois sentidos! 🤯 Depende da tônica.",warmup:"Practice clapping with word stress.",speaking:"Read sentences where meaning changes with stress.",writing:"Identify stress in 10 words.",hook:"Stress is the difference between a 'present' and to 'present'.",hashtags:["#PronunciationTips","#WordStress","#SpeakEnglish"],production:"Clap or snap your fingers on the stressed syllable.",audioVibe:"Rhythmic / Percussive",commonError:"Stressing the wrong syllable in nouns vs verbs."},
+  {id:28,day:"March 28",type:"Story",focus:"Hobbies",level:"A1",title:"What do you do?",captionEn:"Relax and learn! 🎨 What do you enjoy in your free time?",captionPt:"Relaxe e aprenda! 🎨 O que você curte fazer no tempo livre?",warmup:"Mime a hobby; others guess.",speaking:"Interview a partner about their weekend.",writing:"Write about your dream weekend.",hook:"I 'go' swimming but I 'play' football. Why?",hashtags:["#EnglishForBeginners","#Hobbies","#A1English"],production:"Montage of you doing different hobbies. Cozy vibe.",audioVibe:"Ukelele / Relaxing",commonError:"Using 'I play' for everything (I play swimming — wrong)."},
+  {id:29,day:"March 29",type:"Carousel",focus:"Technology",level:"B1",title:"Digital Life",captionEn:"Tech is everywhere. 💻 Master the digital vocabulary.",captionPt:"Tech está em tudo. 💻 Domine o vocabulário digital.",warmup:"How many hours do you spend online?",speaking:"Explain how to set up an account.",writing:"Guide: How to stay safe online.",hook:"Do you 'browse' the web or 'surf' it?",hashtags:["#TechEnglish","#DigitalVocab","#ITEnglish"],production:"Sleek, tech-focused graphics. Matrix-style overlays.",audioVibe:"Electronic / Futuristic",commonError:"Saying 'print the screen' instead of 'take a screenshot'."},
+  {id:30,day:"March 30",type:"Challenge",focus:"Monthly Review",level:"All",title:"Show Your Progress",captionEn:"Reflect and grow. 🌱 What was your breakthrough this month?",captionPt:"Reflita e cresça. 🌱 Qual foi sua conquista este mês?",warmup:"Review the month's vocab list.",speaking:"1-minute speech about something new.",writing:"Set 3 goals for April.",hook:"Consistency is key. You've been here for 30 days!",hashtags:["#EnglishGoals","#Progress","#MonthlyReview"],production:"Emotional, high-energy recap video. Show clips of your month.",audioVibe:"Triumphant / Cinematic",commonError:"Focusing on what you didn't learn yet. Celebrate wins!"},
+  {id:31,day:"March 31",type:"Reels",focus:"Motivation",level:"B1",title:"The Final Push",captionEn:"You didn't come this far to only come this far. ✨",captionPt:"Você não chegou até aqui para apenas chegar até aqui. ✨",warmup:"What keeps you motivated?",speaking:"Share a quote that inspires you.",writing:"Motivational letter to a fellow student.",hook:"The best time to start was yesterday. The second best time is now.",hashtags:["#EnglishMotivation","#LanguageLearning","#SuccessQuotes"],production:"Inspirational lighting. Direct eye contact with camera.",audioVibe:"Powerful / Piano crescendo",commonError:"Thinking fluency happens overnight."}
+];
+
+const LEVELS=['All','A1','A2','B1','B2','C1'];
+const TYPES=['All','Reels','Carousel','Story','Challenge'];
+const TABS=[{id:'strategy',label:'Strategy',icon:'🎯'},{id:'production',label:'Produção',icon:'🎬'},{id:'classroom',label:'Aula',icon:'📖'}];
+
+let selectedLevel='All',selectedType='All',activeItem=DATA[0],activeTab='strategy';
+
+const isMobile=()=>window.innerWidth<1024;
+
+function filtered(){return DATA.filter(d=>(selectedLevel==='All'||d.level===selectedLevel)&&(selectedType==='All'||d.type===selectedType));}
+
+function copyText(text){
+  navigator.clipboard.writeText(text).catch(()=>{});
+  const btns=document.querySelectorAll('.copy-btn');
+  btns.forEach(b=>{if(b.dataset.text===text){const orig=b.textContent;b.textContent='✓ Copiado!';setTimeout(()=>{b.textContent=orig;},1500);}});
+}
+
+function renderFilters(){
+  document.getElementById('level-filters').innerHTML=LEVELS.map(l=>`<button class="btn btn-level${selectedLevel===l?' active':''}" onclick="setLevel('${l}')">${l}</button>`).join('');
+  document.getElementById('type-filters').innerHTML=TYPES.map(t=>`<button class="btn btn-type${selectedType===t?' active':''}" onclick="setType('${t}')">${t}</button>`).join('');
+}
+
+function renderList(){
+  const items=filtered();
+  const list=document.getElementById('post-list');
+  if(!items.length){list.innerHTML=`<div class="empty-state"><div class="empty-icon">🔍</div><p>Nenhum post encontrado.</p></div>`;return;}
+  list.innerHTML=items.map(d=>`
+    <div class="post-card${activeItem&&activeItem.id===d.id?' active':''}" onclick="selectItem(${d.id})">
+      <div class="post-meta">
+        <span class="post-day">${d.day}</span>
+        <div class="post-tags"><span class="tag tag-level">${d.level}</span><span class="tag tag-type">${d.type}</span></div>
+      </div>
+      <div class="post-title">${d.title}</div>
+      <div class="post-focus">${d.focus}</div>
+    </div>`).join('');
+}
+
+function renderTabs(){
+  document.getElementById('tab-bar').innerHTML=TABS.map(t=>`<button class="tab-btn${activeTab===t.id?' active':''}" onclick="setTab('${t.id}')">${t.icon} ${t.label}</button>`).join('');
+}
+
+function renderDetail(){
+  if(!activeItem)return;
+  const d=activeItem;
+  document.getElementById('footer-level').textContent=`Target: ${d.level} Learners`;
+  let html='';
+  if(activeTab==='strategy'){
+    html=`
+      <div class="section">
+        <div class="section-title s-blue">💬 Captions & Hooks</div>
+        <div class="block">
+          <div class="field-label">Hook Line</div>
+          <div class="hook-text">"${d.hook}"</div>
+          <div class="sep"></div>
+          <div class="field-row"><span class="field-label">Caption (EN)</span><button class="copy-btn en" data-text="${d.captionEn.replace(/"/g,'&quot;')}" onclick="copyText('${d.captionEn.replace(/'/g,"\\'")}')">Copiar</button></div>
+          <div class="caption-en">"${d.captionEn}"</div>
+          <div class="sep"></div>
+          <div class="field-row"><span class="field-label">Tradução (PT)</span><button class="copy-btn pt" data-text="${d.captionPt.replace(/"/g,'&quot;')}" onclick="copyText('${d.captionPt.replace(/'/g,"\\'")}')">Copiar</button></div>
+          <div class="caption-pt">"${d.captionPt}"</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title s-pink">⚠️ Erro Comum</div>
+        <div class="warning-block"><div class="warning-text">"${d.commonError}"</div></div>
+      </div>
+      <div class="section">
+        <div class="section-title s-slate">⚡ Hashtags</div>
+        <div class="hashtag-list">${d.hashtags.map(h=>`<span class="hashtag">${h}</span>`).join('')}</div>
+      </div>`;
+  } else if(activeTab==='production'){
+    html=`
+      <div class="section">
+        <div class="section-title s-purple">🎥 Notas de Direção</div>
+        <div class="block"><p class="prod-text">${d.production}</p></div>
+      </div>
+      <div class="section">
+        <div class="section-title s-yellow">🎵 Áudio</div>
+        <div class="audio-row"><span class="audio-icon">🎵</span><span class="audio-label">${d.audioVibe}</span></div>
+      </div>`;
+  } else {
+    html=`
+      <div class="class-block cb-blue"><div class="cb-label cbl-blue">Aquecimento</div><div class="cb-text">${d.warmup}</div></div>
+      <div class="class-block cb-purple"><div class="cb-label cbl-purple">Atividade Principal</div><div class="cb-text">${d.speaking}</div></div>
+      <div class="class-block cb-green"><div class="cb-label cbl-green">Produção Escrita</div><div class="cb-text">${d.writing}</div></div>`;
+  }
+  document.getElementById('tab-content').innerHTML=html;
+}
+
+function setLevel(l){selectedLevel=l;syncActive();renderFilters();renderList();renderDetail();}
+function setType(t){selectedType=t;syncActive();renderFilters();renderList();renderDetail();}
+function setTab(t){activeTab=t;renderTabs();renderDetail();}
+
+function selectItem(id){
+  activeItem=DATA.find(d=>d.id===id);
+  renderList();
+  renderTabs();
+  renderDetail();
+  if(isMobile()){
+    setTimeout(()=>{
+      document.getElementById('detail-panel').scrollIntoView({behavior:'smooth',block:'start'});
+    },50);
+  }
+}
+
+function syncActive(){const items=filtered();if(items.length&&!items.find(d=>d.id===activeItem?.id))activeItem=items[0];}
+
+renderFilters();renderList();renderTabs();renderDetail();
+</script>
+</body>
+</html>
